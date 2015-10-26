@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+
 
 if True:
     series = pd.Series(['Dave', 'Cheng-Han', 'Udacity', 42, -3978628])
@@ -23,3 +25,41 @@ if True:
     print series > 3
     print ""
     print series[series>3]
+    print ""
+
+'''
+Data Frames in pandas
+'''
+if True:
+    data = {
+        'year': [2010, 2011, 2012, 2011, 2012, 2010, 2011, 2012],
+        'team': ['Bears', 'Bears', 'Bears', 'Packers', 'Packers', 'Lions', 'Lions', 'Lions'],
+        'wins': [11, 8, 10, 15, 11, 6, 10, 4],
+        'losses': [5, 8, 6, 1, 5, 10, 6, 12]
+    }
+    football = pd.DataFrame(data)
+    print football
+    print ""
+
+'''
+Pandas also has various functions to help understand some basic information about the data.
+1) dtypes: to get the datatype for each column
+2) describe: useful for seeing basic statistics of dataframe's numeric columns.
+3) head: displays the first five rows of the dataset
+4) tail: displays the last five rows of the dataset
+'''
+if True:
+    data = {
+        'year': [2010, 2011, 2012, 2011, 2012, 2010, 2011, 2012],
+        'team': ['Bears', 'Bears', 'Bears', 'Packers', 'Packers', 'Lions', 'Lions', 'Lions'],
+        'wins': [11, 8, 10, 15, 11, 6, 10, 4],
+        'losses': [5, 8, 6, 1, 5, 10, 6, 12]
+    }
+    football = pd.DataFrame(data)
+    print football.dtypes
+    print ""
+    print football.describe(include='all')
+    print ""
+    print football.head()
+    print ""
+    print football.tail()
