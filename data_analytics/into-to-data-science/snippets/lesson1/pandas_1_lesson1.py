@@ -63,3 +63,23 @@ if True:
     print football.head()
     print ""
     print football.tail()
+    print ""
+    print football['year']
+    print ""
+    print football.year  # shorthand for football['year']
+    print ""
+    print football[['year', 'wins', 'losses']]
+    print ""
+    # Row selection can be done by follwoing methods:
+    # 1) Slicing
+    # 2) An individual index (through the functions iloc or loc)
+    # 3) Boolean indexing
+    print football.iloc[[0]]
+    print ""
+    print football.loc[[0]]
+    print ""
+    print football[3:5]
+    print ""
+    print football[football.wins > 10]
+    print ""
+    print football[(football.wins > 10) & (football.team == 'Packers')]
