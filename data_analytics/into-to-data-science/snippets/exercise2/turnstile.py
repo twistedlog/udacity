@@ -20,9 +20,10 @@ def process(filename):
 
 def _readline(line):
     prefix = np.array(line[:3])
-    line = np.array(line[3:])
+    line = np.array([ele.strip() for ele in line[3:]])
     split_factor = len(line) / 5
     splits = np.split(line, split_factor)
+    print splits
     for split in splits:
         return np.concatenate((prefix, split), axis=1).tolist()
 
