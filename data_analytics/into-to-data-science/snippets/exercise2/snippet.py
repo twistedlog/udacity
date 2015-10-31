@@ -14,11 +14,33 @@ def num_rainy_days(filename):
 def max_temp_aggregate_by_fog(filename):
     weather_data = pandas.read_csv(filename, na_values='')
     q = '''
-    SELECT MAX(maxtempmi) AS maxtemp, fog from weather_data group by fog;
+    SELECT fog, MAX(cast(maxtempi AS integer)) AS weather_data FROM weather_data GROUP BY fog;
     '''
     max_tmp_by_fog = pandasql.sqldf(q.lower(), locals())
     return max_tmp_by_fog
 
+
+def avg_weekend_temprature(filename):
+    weather_data = pandas.read_csv(filename, na_values='')
+    q = '''
+    SELECT AVG(cast(meantempi AS integer)) AS weather_data FROM weather_data WHERE cast(strftime('%w', date) as integer) IN (0, 6);
+    '''
+    avg_weekend_temp = pandasql.sqldf(q.lower(), locals())
+    return avg_weekend_temp
+
+
+def avg_min_temprature(filename):
+    weather_data = pandas.read_csv(filename, na_values='')
+    q = '''
+    SELECT AVG(cast(mintempi AS integer)) AS weather_data FROM weather_data WHERE rain =1 AND mintempi > 55;
+    '''
+    avg_min_temp = pandasql.sqldf(q.lower(), locals())
+    return avg_min_temp
+
+
 if __name__ == "__main__":
-    print num_rainy_days('weather_underground.csv')
-    print max_temp_aggregate_by_fog('weather_underground.csv')
+    filename = 'weather_underground.csv'
+    print num_rainy_days(filename)
+    print max_temp_aggregate_by_fog(filename)
+    print avg_weekend_temprature(filename)
+    print avg_min_temprature(filename)
